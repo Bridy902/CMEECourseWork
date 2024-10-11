@@ -1,0 +1,41 @@
+#1 Count how many lines there are in each file
+
+wc -l 407228412.fasta
+wc -l 407228326.fasta
+
+
+#2 Print everything starting from the second line for the E. coli genome
+
+tail -n +2 E.coli.fasta
+
+
+#3 Count the sequence length of this genome
+
+wc -c < E.coli.fasta
+
+
+4# Count the matches of a particular sequence, “ATGC” in the genome of E. coli (hint: Start by removing the first line and removing newline characters)
+
+sed '1d' E.coli.fasta | tr -d '\n' | grep -o "ATGC" | wc -l
+
+#sed '1d' E.coli.fasta: This removes the first line from the file.
+tr -d '\n': This removes all newline characters, concatenating the genome into a single line.
+grep -o "ATGC": This finds all occurrences of the sequence "ATGC" and outputs each match on a new line.
+wc -l: This counts the number of lines output by grep, which corresponds to the number of matches for "ATGC".
+
+
+5# Compute the AT/GC ratio. That is, the (A+T)/(G+C) ratio (as a single number). This is a summary measure of base composition of double-stranded DNA. DNA from different organisms and lineages has different ratios of the A-to-T and G-to-C base pairs (google “Chargaff’s rule”). For example, DNA from organisms that live in hot springs have a higher GC content, the GC base pair is more thermally stable.
+
+A_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'A' | wc -c)
+T_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'T' | wc -c)
+G_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'G' | wc -c)
+C_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'C' | wc -c)
+AT_ratio=$(echo "scale=5; ($A_count + $T_count) / ($G_count + $C_count)" | bc)
+echo "AT/GC Ratio: $AT_ratio"
+
+#grep -v '^>' E.coli.fasta: Excludes the header lines.
+tr -d '\n': Removes newline characters, making it a single line.
+tr -cd 'A': Counts only A's, and similar for T, G, and C.
+wc -c: Counts the number of characters (i.e., the number of each base).
+scale=5: Sets the number of decimal places for the output.
+bc: A command-line calculator for performing the arithmetic.
