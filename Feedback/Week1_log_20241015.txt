@@ -1,0 +1,319 @@
+Starting code feedback for Lehan, Week1
+
+Current Points = 100
+
+Note that: 
+(1) Major sections begin with a double "====" line 
+(2) Subsections begin with a single "====" line 
+(3) Code output or text file content are printed within single "*****" lines 
+
+======================================================================
+======================================================================
+Your Git repo size this week is about 1.47 MiB on disk 
+
+PART 1: Checking project workflow...
+
+Found the following directories in parent directory: Feedback, Week1, .git
+
+Found the following files in parent directory: README.md
+
+Checking for key files in parent directory...
+
+.gitignore missing, 1 pt deducted
+
+Current Points = 99
+
+Found README in parent directory, named: README.md
+
+Printing contents of README.md:
+
+**********************************************************************
+My CMEE Coursework Repository
+The Code file contains all the code and some comments.
+The Data file contains the files read during the operation.
+The Results file contains some demonstration results of script execution.
+**********************************************************************
+
+======================================================================
+Looking for the weekly directories...
+
+Found 1 weekly directories: Week1
+
+The Week1 directory will be assessed 
+
+======================================================================
+======================================================================
+PART 2: Checking weekly code and workflow...
+
+======================================================================
+Assessing WEEK1...
+
+Found the following directories: Sandbox, Code, Data, Results
+
+Found the following files: 
+
+Checking for readme file in weekly directory...
+
+README file missing, 1 pt deducted
+
+Current Points = 98
+
+Found following files in results directory: 1801.txt, 1800.txt, 1.txt.csv, output.txt, 1803.txt, 1802.txt...
+
+Ideally, Results directory should be empty other than, perhaps a .gitkeep. 
+
+ 0.5 pts deducted per results file 
+
+Current Points = 95.0
+
+Found 4 code files: tabtocsv.sh, UniPrac1.txt, csvtospace.sh, ConcatenateTwoFiles.sh
+
+======================================================================
+Testing script/code files...
+
+======================================================================
+Inspecting script file tabtocsv.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/sh
+# Author: Your Name <lg1824@ic.ac.uk>
+# Script: tabtocsv.sh
+# Description: Create a comma-delimited version of a tab-delimited file.
+# Arguments: 1 -> tab-delimited file
+# Date: Oct 2024
+
+# Function to display usage
+usage() {
+    echo "Usage: $0 <input_file>"
+    echo "Please provide a tab-delimited file."
+    exit 1
+}
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 1 ]; then
+    echo "Error: You must provide one input file."
+    usage
+fi
+
+input_file="$1"
+
+# Check if the input file exists
+if [ ! -f "$input_file" ]; then
+    echo "Error: File '$input_file' not found."
+    exit 1
+fi
+
+# Create the output file name by appending .csv
+output_file="${input_file}.csv"
+
+# Inform the user about the conversion
+echo "Creating a comma-delimited version of '$input_file'..."
+
+# Convert tabs to commas and save to the output file
+tr -s "\t" "," < "$input_file" > "$output_file"
+
+# Confirm completion
+echo "Done! The comma-delimited file is saved as '$output_file'."
+exit 0
+
+
+**********************************************************************
+
+Testing tabtocsv.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Error: You must provide one input file.
+Usage: tabtocsv.sh <input_file>
+Please provide a tab-delimited file.
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00346s
+
+======================================================================
+Inspecting script file UniPrac1.txt...
+
+File contents are:
+
+**********************************************************************
+#1 Count how many lines there are in each file
+
+wc -l 407228412.fasta
+wc -l 407228326.fasta
+
+
+#2 Print everything starting from the second line for the E. coli genome
+
+tail -n +2 E.coli.fasta
+
+
+#3 Count the sequence length of this genome
+
+wc -c < E.coli.fasta
+
+
+4# Count the matches of a particular sequence, “ATGC” in the genome of E. coli (hint: Start by removing the first line and removing newline characters)
+
+sed '1d' E.coli.fasta | tr -d '\n' | grep -o "ATGC" | wc -l
+
+#sed '1d' E.coli.fasta: This removes the first line from the file.
+tr -d '\n': This removes all newline characters, concatenating the genome into a single line.
+grep -o "ATGC": This finds all occurrences of the sequence "ATGC" and outputs each match on a new line.
+wc -l: This counts the number of lines output by grep, which corresponds to the number of matches for "ATGC".
+
+
+5# Compute the AT/GC ratio. That is, the (A+T)/(G+C) ratio (as a single number). This is a summary measure of base composition of double-stranded DNA. DNA from different organisms and lineages has different ratios of the A-to-T and G-to-C base pairs (google “Chargaff’s rule”). For example, DNA from organisms that live in hot springs have a higher GC content, the GC base pair is more thermally stable.
+
+A_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'A' | wc -c)
+T_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'T' | wc -c)
+G_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'G' | wc -c)
+C_count=$(grep -v '^>' E.coli.fasta | tr -d '\n' | tr -cd 'C' | wc -c)
+AT_ratio=$(echo "scale=5; ($A_count + $T_count) / ($G_count + $C_count)" | bc)
+echo "AT/GC Ratio: $AT_ratio"
+
+#grep -v '^>' E.coli.fasta: Excludes the header lines.
+tr -d '\n': Removes newline characters, making it a single line.
+tr -cd 'A': Counts only A's, and similar for T, G, and C.
+wc -c: Counts the number of characters (i.e., the number of each base).
+scale=5: Sets the number of decimal places for the output.
+bc: A command-line calculator for performing the arithmetic.
+**********************************************************************
+
+Testing UniPrac1.txt...
+
+======================================================================
+Inspecting script file csvtospace.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <input_file.csv>"
+    exit 1
+fi
+
+input_file="$1"
+
+# Check if the input file exists
+if [ ! -f "$input_file" ]; then
+    echo "Error: File '$input_file' not found."
+    exit 1
+fi
+
+# Check if the file has a .csv extension
+if [[ "$input_file" != *.csv ]]; then
+    echo "Error: File '$input_file' is not a CSV file."
+    exit 1
+fi
+
+# Create the output file name by replacing .csv with .txt
+output_file="${input_file%.csv}.txt"
+
+# Convert CSV to space-separated values
+tr ',' ' ' < "$input_file" > "$output_file"
+
+echo "Converted '$input_file' to '$output_file'."
+
+
+**********************************************************************
+
+Testing csvtospace.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Usage: csvtospace.sh <input_file.csv>
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00360s
+
+======================================================================
+Inspecting script file ConcatenateTwoFiles.sh...
+
+File contents are:
+
+**********************************************************************
+#!/bin/bash
+
+# Function to display usage
+usage() {
+    echo "Usage: $0 <file1> <file2> <output_file>"
+    echo "Please provide two input files and one output file name."
+    exit 1
+}
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 3 ]; then
+    echo "Error: You must provide two input files and one output file."
+    usage
+fi
+
+file1="$1"
+file2="$2"
+output_file="$3"
+
+# Check if the first file exists
+if [ ! -f "$file1" ]; then
+    echo "Error: File '$file1' not found."
+    exit 1
+fi
+
+# Check if the second file exists
+if [ ! -f "$file2" ]; then
+    echo "Error: File '$file2' not found."
+    exit 1
+fi
+
+# Merge the two files into the output file
+cat "$file1" > "$output_file"
+cat "$file2" >> "$output_file"
+
+echo "Merged file is: $output_file"
+cat "$output_file"
+
+**********************************************************************
+
+Testing ConcatenateTwoFiles.sh...
+
+Output (only first 500 characters): 
+
+
+**********************************************************************
+Error: You must provide two input files and one output file.
+Usage: ConcatenateTwoFiles.sh <file1> <file2> <output_file>
+Please provide two input files and one output file name.
+
+**********************************************************************
+
+Code ran without errors
+
+Time consumed = 0.00478s
+
+======================================================================
+======================================================================
+Finished running scripts
+
+Ran into 0 errors
+
+======================================================================
+======================================================================
+
+FINISHED WEEKLY ASSESSMENT
+
+Current Points for the Week = 95.0
+
+NOTE THAT THESE ARE POINTS, NOT MARKS FOR THE WEEK!
