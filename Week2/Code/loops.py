@@ -1,3 +1,7 @@
+"""
+Demonstrates `for` loops for iteration and cumulative sum, and a `while` loop to count from 0 to 100.
+"""
+
 # FOR loops
 for i in range(5):
     print(i)

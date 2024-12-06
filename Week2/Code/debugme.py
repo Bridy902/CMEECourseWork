@@ -1,3 +1,7 @@
+"""
+Demonstrates exception handling by attempting division in a loop. Handles `ZeroDivisionError` and other exceptions, printing debug info.
+"""
+
 def buggyfunc(x):
     y = x
     for i in range(x):

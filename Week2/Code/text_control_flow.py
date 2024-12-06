@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 """Some functions exemplifying the use of control statements"""
 

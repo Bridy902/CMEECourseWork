@@ -1,3 +1,15 @@
+# This script processes monthly rainfall data and performs the following tasks:
+ 
+# 1.Filters months with rainfall greater than 100 mm using:
+# - List comprehensions.
+# - Conventional loops.
+ 
+# 2. Filters months with rainfall less than 50 mm using:
+#  - List comprehensions.
+#  - Conventional loops.
+ 
+# The rainfall data is stored as tuples, where each tuple represents a month and its corresponding rainfall value in mm.
+
 birds = ( 
     ('Passerculus sandwichensis', 'Savannah sparrow', 18.7),
     ('Delichon urbica', 'House martin', 19),

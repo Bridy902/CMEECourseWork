@@ -1,3 +1,7 @@
+# This script demonstrates a set of mathematical functions, including calculations for square roots,
+# comparisons, sorting numbers, factorials (using loops and recursion), and more. The `main` function provides examples of calling these functions with various inputs.
+# Usage: Run this script directly to see the outputs of the different mathematical functions.
+ 
 ## import ##
 import sys
 

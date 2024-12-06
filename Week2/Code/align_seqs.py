@@ -1,3 +1,8 @@
+"""
+This script reads two DNA sequences from a CSV file, finds the best alignment with the highest score, 
+and writes the results to a text file.
+"""
+
 import csv
 
 def assign_sequences(seq1, seq2):

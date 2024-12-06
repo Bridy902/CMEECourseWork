@@ -1,3 +1,7 @@
+"""
+Identifies oak species (`Quercus`) from a list of taxa and converts their names to uppercase using loops and comprehensions.
+"""
+
 ## Finds just those taxa that are oak trees from a list of species
 
 taxa = [ 'Quercus robur',

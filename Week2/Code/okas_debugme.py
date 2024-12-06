@@ -1,3 +1,17 @@
+"""
+Processes a CSV file of species data to identify oaks (`Quercus`) and writes relevant rows to a new file.
+ 
+Functions:
+- `is_an_oak(name)`: Checks if a species name starts with 'Quercus' (case-insensitive), includes doctests for validation.
+- `main(argv)`: 
+  - Reads input species data from `../data/TestOaksData.csv`.
+  - Filters rows where the genus is 'Quercus'.
+  - Writes filtered rows to `../results/JustOakData.csv`.
+  - Handles file and directory creation, and prints processing details.
+ 
+Usage:
+Run the script to filter oak species and save results. Includes built-in doctests for `is_an_oak`.
+"""
 
 import csv
 import sys

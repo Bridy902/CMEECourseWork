@@ -1,3 +1,10 @@
+"""
+This script processes a CSV file with species data. It performs the following:
+ 
+1. Reads the CSV file and prints each row, along with the species name.
+2. Writes a new CSV file containing only the species name and body mass.
+ 
+"""
 import csv
 
 # Read a file containing:

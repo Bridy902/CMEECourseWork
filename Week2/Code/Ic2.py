@@ -1,3 +1,11 @@
+"""
+Analyzes monthly rainfall data to:
+1. Identify months with rainfall greater than 100 mm and less than 50 mm using:
+   - List comprehensions.
+   - Conventional loops.
+2. Print the results for both methods.
+"""
+
 rainfall = (('JAN', 111.4),
             ('FEB', 126.1),
             ('MAR', 49.9),
