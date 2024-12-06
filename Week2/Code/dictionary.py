@@ -1,3 +1,11 @@
+
+# This script processes a list of taxa, groups them by their taxonomic order,
+# and prints the results in a human-readable format.
+ 
+# Usage:
+# Run the script directly. It outputs a formatted dictionary of orders and taxa.
+
+
 taxa = [ 
     ('Myotis lucifugus', 'Chiroptera'),
     ('Gerbillus henleyi', 'Rodentia'),

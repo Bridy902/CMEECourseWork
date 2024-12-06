@@ -1,3 +1,17 @@
+"""
+This script aligns two DNA sequences from FASTA files to find the best alignment and score.
+ 
+Steps:
+1. Reads sequences from FASTA files.
+2. Assigns longer and shorter sequences.
+3. Calculates alignment scores.
+4. Finds the best alignments with the highest score.
+5. Saves results using `pickle` and prints them to the console.
+ 
+Usage:
+    python align_seqs_better.py <sequence1.fasta> <sequence2.fasta>
+"""
+
 import sys
 import pickle
 

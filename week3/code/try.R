@@ -1,3 +1,9 @@
+#'
+
+#' Demonstrates sampling from a population and calculating the mean if the sample has more than 30 unique values.
+
+#' Errors are captured during repeated sampling.
+
 doit <- function(x) {
     temp_x <- sample(x, replace = TRUE)
     if(length(unique(temp_x)) > 30) {#only take mean if sample was sufficient

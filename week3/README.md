@@ -15,10 +15,14 @@ The following files can be found in the 'code' folder:
 > browse.R
 > control_flow.R
 > DataWrang.R
+> Florida.R
+> Florida.tex
+> get_TreeHeight.R
 > Griko.R
 > Mybars.R
 > next.R
 > plotLin.R
+> PP_Regress.R
 > practice.R
 > preallocate.R
 > R_conditionals.R
@@ -33,8 +37,11 @@ The following files can be found in the 'code' folder:
 > PoundHillData.csv
 > PoundHillMetaData.csv
 > EcolArchives-E089-51-D1.csv
+> KeyWestAnnualMeanTemperature.RData
 
 'results'
+> Florida_Histogram.png #The PNG file is obtained by running the Florida.R program first, so that it can be referenced when running the latex file.
+> Florida.pdf
 
 'sandbox'
 > .gitkeep
